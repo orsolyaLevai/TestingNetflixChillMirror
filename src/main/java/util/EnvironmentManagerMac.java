@@ -6,20 +6,20 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class EnvironmentManagerMac {
 
-    private static String driverPath = System.getenv("driverPath");
     private static WebDriver driver;
+    private static ConfigProperties configProperties;
 
 
     public static void initChromeWebDriver() {
-
+        configProperties = new ConfigProperties();
         driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver", driverPath);
+        System.setProperty("webdriver.chrome.driver", configProperties.getDriverPath());
 
         RunEnvironment.setWebDriver(driver);
     }
 
     public static void initFireFoxWebDriver() {
-        System.setProperty("webdriver.gecko.driver", driverPath);
+        System.setProperty("webdriver.gecko.driver", configProperties.getDriverPath());
         driver = new FirefoxDriver();
 
         RunEnvironment.setWebDriver(driver);

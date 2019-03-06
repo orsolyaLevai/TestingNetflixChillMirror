@@ -5,20 +5,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class EnvironmentManagerWin {
-    private static String driverPath = System.getenv("driverPath");
     private static WebDriver driver;
+    private static ConfigProperties configProperties;
 
 
     public static void initChromeWebDriver() {
+        configProperties = new ConfigProperties();
 
-        System.setProperty("webdriver.chrome.driver", driverPath);
+        System.setProperty("webdriver.chrome.driver", configProperties.getDriverPath());
         driver = new ChromeDriver();
 
         RunEnvironment.setWebDriver(driver);
     }
 
     public static void initFireFoxWebDriver() {
-        System.setProperty("webdriver.gecko.driver", driverPath );
+        System.setProperty("webdriver.gecko.driver", configProperties.getDriverPath() );
         driver = new FirefoxDriver();
 
         RunEnvironment.setWebDriver(driver);

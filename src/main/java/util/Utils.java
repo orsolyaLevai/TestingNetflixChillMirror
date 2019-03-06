@@ -8,8 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Utils {
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
+public class Utils {
     /**
      * Environment variables
      * driverPath
@@ -18,9 +21,11 @@ public class Utils {
      * myDriver
      */
     public static void setup() {
+        ConfigProperties configProperties = new ConfigProperties();
+
         if (OS.isFamilyMac()) {
 
-            if (System.getenv("myDriver").equals("chrome")){
+            if (configProperties.getMyDriver().equals("chrome")){
                 System.out.println("1*******************");
                 System.out.println("Launching chrome browser");
                 EnvironmentManagerMac.initChromeWebDriver();
@@ -34,7 +39,7 @@ public class Utils {
 
         } else {
 
-            if (System.getenv("myDriver").equals("chrome")){
+            if (configProperties.getMyDriver().equals("chrome")){
                 System.out.println("3*******************");
                 System.out.println("Launching chrome browser");
                 EnvironmentManagerWin.initChromeWebDriver();
@@ -47,6 +52,7 @@ public class Utils {
             }
         }
     }
+
 
     public  static void tearDown() {
         if (OS.isFamilyMac()) {

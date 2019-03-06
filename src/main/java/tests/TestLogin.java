@@ -5,13 +5,23 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.openqa.selenium.WebDriver;
 import pagefactories.Login;
+import util.ConfigProperties;
 import util.RunEnvironment;
 import util.Utils;
+
+import java.util.Properties;
 
 public class TestLogin {
 
     protected Login login;
     protected WebDriver driver;
+    protected static ConfigProperties configProperties;
+
+    @BeforeAll
+    public static void registerUser() {
+        //Read the user's properties from file
+        configProperties = new ConfigProperties();
+    }
 
     @BeforeEach
     public void setup() {
@@ -22,7 +32,10 @@ public class TestLogin {
     }
 
 
+    @Test
+    public void testLoginForValidCredentials() {
 
+    }
 
 
     @AfterEach
