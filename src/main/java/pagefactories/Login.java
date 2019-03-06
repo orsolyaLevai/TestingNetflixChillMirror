@@ -9,6 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Login {
+
+    //@FindBy(linkText = "Join")
+    @FindBy(css = "a[href*='/join']")
+    WebElement joinButton;
+
     protected WebDriver driver;
     protected WebDriverWait wait;
 
@@ -22,5 +27,12 @@ public class Login {
         PageFactory.initElements(driver, this);
     }
 
+    public void login() {
+        driver.navigate().to("http://localhost:4200/");
+        wait.until(ExpectedConditions.elementToBeClickable(joinButton)).click();
+        //userName.sendKeys(System.getenv("username"));
+        //password.sendKeys(System.getenv("password"));
+        //loginBtn.click();
+    }
 
 }

@@ -34,12 +34,12 @@ public class TestLogin {
 
     @Test
     public void testLoginForValidCredentials() {
-
+        login.login();
     }
 
 
     @AfterEach
     public void tearDown() {
-        Utils.tearDown();
+        //Utils.tearDown();
     }
 }
