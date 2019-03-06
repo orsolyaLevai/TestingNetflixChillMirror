@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Navbar {
@@ -39,5 +40,13 @@ public class Navbar {
     public void search(String searchStr){
         searchIcon.click();
         searchField.sendKeys(searchStr + Keys.ENTER);
+    }
+
+    public void clickLoginInTheHeader() {
+        wait.until(ExpectedConditions.visibilityOf(loginButtonInHeader)).click();
+    }
+
+    public void clickLogoutInHeader() {
+        wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
 }
