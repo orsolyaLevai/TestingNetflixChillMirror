@@ -3,6 +3,7 @@ package tests;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import pagefactories.Login;
+import pagefactories.Navbar;
 import pagefactories.Registration;
 import util.ConfigProperties;
 import util.RunEnvironment;
@@ -52,10 +53,16 @@ public class RegisterTest {
         login.fillUserName(userName);
         login.fillPassword(password);
 
+
+
         assertEquals(0, login.clickOnLoginButton(),
                 "Registration: something went wrong with registration. The user cannot be found in the database! " +
                         "Check the credentials!");
 
+        driver.navigate().refresh();
+
+        Navbar navbar = new Navbar(driver);
+        navbar.clickLogoutInHeader();
     }
 
     @Test
@@ -87,13 +94,13 @@ public class RegisterTest {
 
 
 
-    /*@AfterEach
+    @AfterEach
     public void tearDown() {
         //Utils.tearDown();
-    }*/
+    }
 
-    @AfterAll
+    /*@AfterAll
     static void tearDown() {
         Utils.tearDown();
-    }
+    }*/
 }
