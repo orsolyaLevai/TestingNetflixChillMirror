@@ -13,12 +13,11 @@ public class ConfigProperties {
 
     public ConfigProperties() {
         Properties props = readProperties();
-        userName = props.getProperty("username");
-        password = props.getProperty("password");
-        email = props.getProperty("email");
-        driverPath = props.getProperty("driverpath");
-        myDriver = props.getProperty("mydriver");
-        System.out.println(userName + ": " + password + ": " + driverPath + ": " + myDriver);
+        this.userName = props.getProperty("username");
+        this.password = props.getProperty("password");
+        this.email = props.getProperty("email");
+        this.driverPath = props.getProperty("driverpath");
+        this.myDriver = props.getProperty("mydriver");
     }
 
     public String getUserName() {
@@ -39,6 +38,18 @@ public class ConfigProperties {
 
     public String getMyDriver() {
         return myDriver;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     private static Properties readProperties() {
