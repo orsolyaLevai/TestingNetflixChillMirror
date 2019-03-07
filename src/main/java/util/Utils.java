@@ -29,12 +29,10 @@ public class Utils {
                 System.out.println("1*******************");
                 System.out.println("Launching chrome browser");
                 EnvironmentManagerMac.initChromeWebDriver();
-                //driver.manage().window().maximize();
-            }else {
+            } else {
                 System.out.println("2*******************");
                 System.out.println("Launching firefox browser");
                 EnvironmentManagerMac.initFireFoxWebDriver();
-                //driver.manage().window().maximize();
             }
 
         } else {
@@ -44,11 +42,10 @@ public class Utils {
                 System.out.println("Launching chrome browser");
                 EnvironmentManagerWin.initChromeWebDriver();
 
-            }else {
+            } else {
                 System.out.println("4*******************");
                 System.out.println("Launching firefox browser");
                 EnvironmentManagerWin.initFireFoxWebDriver();
-
             }
         }
     }

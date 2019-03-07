@@ -6,11 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import pagefactories.*;
 import util.ConfigProperties;
+import util.Keywords;
 import util.RunEnvironment;
 import util.Utils;
 
 public class TestMyPage {
-    private static Login login;
+    private static LoginPage login;
     private static WebDriver driver;
     private static ConfigProperties configProperties;
 
@@ -20,25 +21,20 @@ public class TestMyPage {
         configProperties = new ConfigProperties();
         Utils.setup();
         driver = RunEnvironment.getWebDriver();
-        login = new Login(driver);
+        login = new LoginPage();
         driver.manage().window().maximize();
     }
 
     @BeforeEach
     public void beforeEach(){
-        login.login();
+        Keywords.login();
     }
     
     @Test
     public void addToFavourites(){
         Navbar navBar = new Navbar();
-        navBar.search("steven universe");
-        SearchResults searchResults = new SearchResults();
-        searchResults.clickOnTitle("steven universe");
-        ShowDetails showDetails = new ShowDetails();
-        showDetails.addToFavorites();
-        MyPage myPage = new MyPage();
-        myPage.goToFavorites();
+        navBar.search("steven universe").clickOnTitle("steven universe").addToFavorites();
+        navBar.goToMyPage().goToFavorites();
     }
 
 }

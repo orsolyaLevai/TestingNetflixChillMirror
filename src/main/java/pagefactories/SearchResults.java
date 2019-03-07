@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.RunEnvironment;
 import util.WaitFor;
@@ -28,12 +27,14 @@ public class SearchResults {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 
-    public void clickOnTitle(String title){
+    public ShowDetails clickOnTitle(String title){
         for(WebElement el: titles){
             if (el.getText().toLowerCase().contains(title.toLowerCase())){
                 el.click();
+                return new ShowDetails();
             }
         }
+        return null;
     }
 
 }
