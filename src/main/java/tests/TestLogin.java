@@ -17,22 +17,17 @@ public class TestLogin {
     protected static Login login;
     protected static WebDriver driver;
     protected static ConfigProperties configProperties;
-    protected static Registration registration;
-    protected static Utils utils;
 
     @BeforeAll
     public static void setupAll() {
         //Read the user's properties from file
         //TODO: if user not exist register it
-        configProperties = new ConfigProperties();
-        utils = new Utils();
-        utils.setup();
-        driver = RunEnvironment.getWebDriver();
-        //driver = new ChromeDriver();
-        //System.setProperty("webdriver.chrome.driver", configProperties.getDriverPath());
 
+        Utils.setup();
+        driver = RunEnvironment.getWebDriver();
         login = new Login(driver);
         driver.manage().window().maximize();
+        configProperties = new ConfigProperties();
 
         /*registration = new Registration(driver);
 
@@ -114,7 +109,7 @@ public class TestLogin {
 
     @AfterAll
     public static void tearDownAll() {
-        utils.tearDown();
+        Utils.tearDown();
         //driver.close();
     }
 

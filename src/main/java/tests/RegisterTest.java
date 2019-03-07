@@ -17,12 +17,10 @@ public class RegisterTest {
     protected static Registration registration;
     protected static Login login;
     protected static WebDriver driver;
-    protected static Utils utils;
 
     @BeforeAll
     public static void setUpBeforeAll() {
-        utils = new Utils();
-        utils.setup();
+        Utils.setup();
         driver = RunEnvironment.getWebDriver();
         configProperties = new ConfigProperties();
         //driver = new ChromeDriver();
@@ -132,7 +130,7 @@ public class RegisterTest {
 
     @AfterAll
     public static void tearDownAll() {
-        utils.tearDown();
+        Utils.tearDown();
         //driver.close();
     }
 }
