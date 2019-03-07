@@ -18,11 +18,9 @@ public class RegisterTest {
     protected static WebDriver driver;
 
     @BeforeAll
-    public static void registerUser() {
+    public static void setUpBeforeAll() {
         //Read the user's properties from file
         Utils.setup();
-
-
         configProperties = new ConfigProperties();
     }
 
@@ -92,7 +90,36 @@ public class RegisterTest {
         assertTrue(registration.isJoinButtonAvailable());
     }
 
+    @Test
+    void testRegistrationWithInvalidCredentials() {
+        String userName = configProperties.getUserName();
+        String password = configProperties.getPassword();
+        String email = configProperties.getEmail();
+        String invalidPassword = "Tesla";
+        String invalidEmailWithDotWithoutAt = "mm.com";
+        String invalidEmailWithAtWithoutDot = "m@mcom";
 
+        registration.goToTheRegisterPage();
+
+        registration.fillUserNameField(userName);
+        registration.fillPasswordField(password);
+        registration.fillConfirmPasswordField(invalidPassword);
+        registration.fillEmailField(email);
+
+        assertFalse(registration.isJoinButtonAvailable());
+
+        registration.fillConfirmPasswordField(password);
+        registration.fillPasswordField(invalidPassword);
+        assertFalse(registration.isJoinButtonAvailable());
+
+        registration.fillPasswordField(password);
+        registration.fillEmailField(invalidEmailWithDotWithoutAt);
+        assertFalse(registration.isJoinButtonAvailable());
+
+        //m@mail
+        registration.fillEmailField(invalidEmailWithAtWithoutDot);
+        assertFalse(registration.isJoinButtonAvailable());
+    }
 
     @AfterEach
     public void tearDown() {

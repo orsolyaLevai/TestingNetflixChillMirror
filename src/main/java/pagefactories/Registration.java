@@ -51,28 +51,28 @@ public class Registration {
 
     public void fillUserNameField(String userName) {
         //wait.until(ExpectedConditions.elementToBeClickable(registerUserName));
-        registerUserName.sendKeys("");
+        registerUserName.clear();
         registerUserName.sendKeys(userName);
         wait.until(ExpectedConditions.textToBePresentInElementValue(registerUserName, registerUserName.getText()));
     }
 
     public void fillPasswordField(String password) {
         //wait.until(ExpectedConditions.elementToBeClickable(registerPassword));
-        registerPassword.sendKeys("");
+        registerPassword.clear();
         registerPassword.sendKeys(password);
         wait.until(ExpectedConditions.textToBePresentInElementValue(registerPassword, registerPassword.getText()));
     }
 
     public void fillConfirmPasswordField(String confirmPassword) {
         //wait.until(ExpectedConditions.elementToBeClickable(registerConfirmPassword));
-        registerConfirmPassword.sendKeys("");
+        registerConfirmPassword.clear();
         registerConfirmPassword.sendKeys(confirmPassword);
         wait.until(ExpectedConditions.textToBePresentInElementValue(registerConfirmPassword, registerConfirmPassword.getText()));
     }
 
     public void fillEmailField(String emailAddress) {
         //wait.until(ExpectedConditions.elementToBeClickable(email));
-        email.sendKeys("");
+        email.clear();
         email.sendKeys(emailAddress);
         wait.until(ExpectedConditions.textToBePresentInElementValue(email, email.getText()));
     }
