@@ -20,11 +20,7 @@ public class Utils {
      * password
      * myDriver
      */
-
-    public Utils() {
-    }
-
-    public void setup() {
+    public static void setup() {
         ConfigProperties configProperties = new ConfigProperties();
 
         if (OS.isFamilyMac()) {
@@ -55,7 +51,7 @@ public class Utils {
     }
 
 
-    public void tearDown() {
+    public  static void tearDown() {
         if (OS.isFamilyMac()) {
             EnvironmentManagerMac.shutDownDriver();
         } else {
@@ -67,7 +63,7 @@ public class Utils {
      * If an alert appears, it accepts.
      * @param driver
      */
-    public void acceptAlert(WebDriver driver) {
+    public static void acceptAlert(WebDriver driver) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, 2);
             wait.until(ExpectedConditions.alertIsPresent());
@@ -83,7 +79,7 @@ public class Utils {
      * @param webElement
      * @param webDriver
      */
-    public void highlighter(WebElement webElement, WebDriver webDriver) {
+    public static void highlighter(WebElement webElement, WebDriver webDriver) {
         JavascriptExecutor js = (JavascriptExecutor) webDriver;
         js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red; border-color: red;');", webElement);
     }
