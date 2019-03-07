@@ -2,7 +2,6 @@ package tests;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pagefactories.Login;
 import pagefactories.Navbar;
 import pagefactories.Registration;
@@ -23,16 +22,9 @@ public class RegisterTest {
         Utils.setup();
         driver = RunEnvironment.getWebDriver();
         configProperties = new ConfigProperties();
-        //driver = new ChromeDriver();
-        //System.setProperty("webdriver.chrome.driver", configProperties.getDriverPath());
         registration = new Registration(driver);
         login = new Login(driver);
         driver.manage().window().maximize();
-    }
-
-    @BeforeEach
-    public void setup() {
-
     }
 
     @Test
@@ -118,19 +110,13 @@ public class RegisterTest {
         registration.fillEmailField(invalidEmailWithDotWithoutAt);
         assertFalse(registration.isJoinButtonAvailable());
 
-        //TODO: the registration is working with m@mail
+        /*** Test email for  missing dot like .com***/
         //registration.fillEmailField(invalidEmailWithAtWithoutDot);
         //assertFalse(registration.isJoinButtonAvailable());
     }
 
-    /*@AfterEach
-    public void tearDown() {
-        Utils.tearDown();
-    }*/
-
     @AfterAll
     public static void tearDownAll() {
         Utils.tearDown();
-        //driver.close();
     }
 }
