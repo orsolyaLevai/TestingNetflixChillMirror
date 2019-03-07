@@ -16,7 +16,8 @@ public class Navbar {
 
     By logoutButtonPath = By.xpath("//nav//a[contains(text(), 'Logout')]");
 
-    @FindBy(css = "a[href*='/login']")
+    //@FindBy(css = "a[href*='/login']")
+    @FindBy(xpath = "//nav//a[contains(text(), 'Login')]")
     private WebElement loginButtonInHeader;
 
     @FindBy(css="a[href*='/user-page']")
@@ -43,10 +44,11 @@ public class Navbar {
     }
 
     public void clickLoginInTheHeader() {
-        wait.until(ExpectedConditions.visibilityOf(loginButtonInHeader)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginButtonInHeader)).click();
     }
 
     public void clickLogoutInHeader() {
+        driver.navigate().refresh();
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
     }
 
