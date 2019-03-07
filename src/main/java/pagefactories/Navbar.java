@@ -9,14 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Navbar {
     //@FindBy(css = "body > app-root > app-navbar > nav > ul.navbar-nav.navbar-right > li:nth-child(2) > a[href*='/join']")
-    @FindBy(xpath = "//nav//a[@href='/join']/..")
+    @FindBy(xpath = "//nav//a[@href='/join']")
     private WebElement joinButton;
 
     @FindBy(xpath = "//nav//a[contains(text(), 'Logout')]/..")
     private WebElement logoutButton;
 
-    //@FindBy(css = "a[href*='/login']")
-    @FindBy(xpath = "//nav//a[contains(text(), 'Login')]")
+    @FindBy(css = "a[href*='/login']")
+    //@FindBy(xpath = "//nav//a[contains(text(), 'Login')]")
     private WebElement loginButtonInHeader;
 
     @FindBy(css="a[href*='/user-page']")
