@@ -45,7 +45,7 @@ public class Registration {
     }
 
     public void goToTheRegisterPage() {
-        driver.navigate().to("http://localhost:4200/");
+        driver.get("http://localhost:4200/");
         wait.until(ExpectedConditions.elementToBeClickable(joinButtonInHeader)).click();
     }
 
