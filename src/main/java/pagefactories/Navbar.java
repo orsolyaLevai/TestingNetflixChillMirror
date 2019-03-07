@@ -34,8 +34,9 @@ public class Navbar {
 
     public Navbar(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 10);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
+        wait = new WebDriverWait(this.driver, 10);
+        //PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
+        PageFactory.initElements(this.driver, this);
     }
 
     public void search(String searchStr){
@@ -49,13 +50,16 @@ public class Navbar {
 
     public void clickLogoutInHeader() {
         driver.navigate().refresh();
-        wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
+        driver.navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOf(logoutButton)).click();
     }
 
     public boolean isLogoutButtonAvailableInTheHeader() {
         try {
             wait.until(ExpectedConditions.visibilityOf(logoutButton));
         } catch (TimeoutException e) {
+            return false;
+        } catch (NoSuchElementException e) {
             return false;
         }
 
