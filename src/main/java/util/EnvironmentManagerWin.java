@@ -27,8 +27,8 @@ public class EnvironmentManagerWin {
 
     public static void shutDownDriver() {
         if(driver!=null) {
-            System.out.println("Closing browser");
             RunEnvironment.getWebDriver().quit();
+            System.out.println("Closing browser");
         }
 
     }
