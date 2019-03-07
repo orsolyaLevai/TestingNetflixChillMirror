@@ -13,7 +13,7 @@ public class EnvironmentManagerMac {
     public static void initChromeWebDriver() {
         configProperties = new ConfigProperties();
         driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver", configProperties.getDriverPath());
+        //System.setProperty("webdriver.chrome.driver", configProperties.getDriverPath());
 
         RunEnvironment.setWebDriver(driver);
     }
