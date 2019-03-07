@@ -2,6 +2,7 @@ package tests;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import pagefactories.Login;
 import pagefactories.Navbar;
 import pagefactories.Registration;
@@ -18,20 +19,20 @@ public class RegisterTest {
     protected static WebDriver driver;
 
     @BeforeAll
-    public static void registerUser() {
-        //Read the user's properties from file
+    public static void setUpBeforeAll() {
         Utils.setup();
-
-
+        driver = RunEnvironment.getWebDriver();
         configProperties = new ConfigProperties();
+        //driver = new ChromeDriver();
+        //System.setProperty("webdriver.chrome.driver", configProperties.getDriverPath());
+        registration = new Registration(driver);
+        login = new Login(driver);
+        driver.manage().window().maximize();
     }
 
     @BeforeEach
     public void setup() {
-        driver = RunEnvironment.getWebDriver();
-        registration = new Registration(driver);
-        login = new Login(driver);
-        driver.manage().window().maximize();
+
     }
 
     @Test
@@ -39,6 +40,7 @@ public class RegisterTest {
         String userName = configProperties.getUserName();
         String password = configProperties.getPassword();
         String email = configProperties.getEmail();
+        Navbar navbar = new Navbar(driver);
 
         registration.goToTheRegisterPage();
 
@@ -53,15 +55,13 @@ public class RegisterTest {
         login.fillUserName(userName);
         login.fillPassword(password);
 
+        login.clickOnLoginButton();
 
-
-        assertEquals(0, login.clickOnLoginButton(),
+        assertTrue(navbar.isLogoutButtonAvailableInTheHeader(),
                 "Registration: something went wrong with registration. The user cannot be found in the database! " +
                         "Check the credentials!");
 
         driver.navigate().refresh();
-
-        Navbar navbar = new Navbar(driver);
         navbar.clickLogoutInHeader();
     }
 
@@ -92,15 +92,45 @@ public class RegisterTest {
         assertTrue(registration.isJoinButtonAvailable());
     }
 
+    @Test
+    void testRegistrationWithInvalidCredentials() {
+        String userName = configProperties.getUserName();
+        String password = configProperties.getPassword();
+        String email = configProperties.getEmail();
+        String invalidPassword = "Tesla";
+        String invalidEmailWithDotWithoutAt = "mm.com";
+        String invalidEmailWithAtWithoutDot = "m@mcom";
 
+        registration.goToTheRegisterPage();
 
-    @AfterEach
-    public void tearDown() {
-        //Utils.tearDown();
+        registration.fillUserNameField(userName);
+        registration.fillPasswordField(password);
+        registration.fillConfirmPasswordField(invalidPassword);
+        registration.fillEmailField(email);
+
+        assertFalse(registration.isJoinButtonAvailable());
+
+        registration.fillConfirmPasswordField(password);
+        registration.fillPasswordField(invalidPassword);
+        assertFalse(registration.isJoinButtonAvailable());
+
+        registration.fillPasswordField(password);
+        registration.fillEmailField(invalidEmailWithDotWithoutAt);
+        assertFalse(registration.isJoinButtonAvailable());
+
+        //TODO: the registration is working with m@mail
+        //registration.fillEmailField(invalidEmailWithAtWithoutDot);
+        //assertFalse(registration.isJoinButtonAvailable());
     }
 
-    /*@AfterAll
-    static void tearDown() {
+    /*@AfterEach
+    public void tearDown() {
         Utils.tearDown();
     }*/
+
+    @AfterAll
+    public static void tearDownAll() {
+        Utils.tearDown();
+        //driver.close();
+    }
 }
