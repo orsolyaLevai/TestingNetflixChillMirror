@@ -7,49 +7,42 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import util.RunEnvironment;
 import util.WaitFor;
 
 import java.util.List;
 
-public class MyPage {
+public class ShowDetails {
 
-    @FindBy(css="div.watchlist")
-    WebElement watchListBtn;
+    @FindBy(css="i.plus")
+    WebElement addToWatchedIcon;
 
-    @FindBy(css="div.favourites")
-    WebElement favoritesBtn;
+    @FindBy(css="i.heart")
+    WebElement addToFavoritesIcon;
 
-    @FindBy(css="div.watched")
-    WebElement watchedBtn;
-
-    By favTitles = By.cssSelector("div.series-title");
-
+    @FindBy(css="i.list")
+    WebElement addToWatchListIcon;
 
     private WebDriver driver;
     private WebDriverWait wait;
     private WaitFor wf;
 
-    public MyPage(WebDriver driver) {
-        this.driver = driver;
+    public ShowDetails() {
+        driver = RunEnvironment.getWebDriver();
         wait = new WebDriverWait(driver, 10);
         wf = new WaitFor(driver);
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 
-    public void goToWatchList(){
-        wf.clickable(watchListBtn).click();
+    public void addToWatchList(){
+        addToWatchListIcon.click();
     }
 
-    public void goToFavorites(){
-        wf.clickable(favoritesBtn).click();
+    public void addToFavorites(){
+        addToFavoritesIcon.click();
     }
 
-    public void goToMyShows(){
-        wf.clickable(watchedBtn).click();
-    }
-
-    public List<String> getFavoriteSeries(){
-        wf.presence(favTitles);
-        return null;
+    public void addToMyShows(){
+        addToWatchedIcon.click();
     }
 }

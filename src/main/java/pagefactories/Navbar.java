@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import util.RunEnvironment;
 
 public class Navbar {
     @FindBy(css = "body > app-root > app-navbar > nav > ul.navbar-nav.navbar-right > li:nth-child(2) > a[href*='/join']")
@@ -30,10 +31,10 @@ public class Navbar {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public Navbar(WebDriver driver) {
-        this.driver = driver;
+    public Navbar(){
+        driver = RunEnvironment.getWebDriver();
         wait = new WebDriverWait(driver, 10);
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
+        PageFactory.initElements(driver, this);
     }
 
     public void search(String searchStr){

@@ -4,12 +4,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
-import pagefactories.Login;
+import pagefactories.*;
 import util.ConfigProperties;
 import util.RunEnvironment;
 import util.Utils;
 
-public class testAddFavourites {
+public class TestMyPage {
     private static Login login;
     private static WebDriver driver;
     private static ConfigProperties configProperties;
@@ -25,13 +25,20 @@ public class testAddFavourites {
     }
 
     @BeforeEach
-    public static void beforeEach(){
+    public void beforeEach(){
         login.login();
     }
     
     @Test
-    public void addFavourites(){
-        
+    public void addToFavourites(){
+        Navbar navBar = new Navbar();
+        navBar.search("steven universe");
+        SearchResults searchResults = new SearchResults();
+        searchResults.clickOnTitle("steven universe");
+        ShowDetails showDetails = new ShowDetails();
+        showDetails.addToFavorites();
+        MyPage myPage = new MyPage();
+        myPage.goToFavorites();
     }
 
 }
