@@ -26,9 +26,9 @@ public class EnvironmentManagerMac {
     }
 
     public static void shutDownDriver() {
-        if(driver!=null) {
+        if(driver != null) {
+            RunEnvironment.getWebDriver().close();
             System.out.println("Closing browser");
-            RunEnvironment.getWebDriver().quit();
         }
 
     }
