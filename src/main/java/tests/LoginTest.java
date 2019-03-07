@@ -2,17 +2,15 @@ package tests;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pagefactories.Login;
 import pagefactories.Navbar;
-import pagefactories.Registration;
 import util.ConfigProperties;
 import util.RunEnvironment;
 import util.Utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TestLogin {
+public class LoginTest {
 
     protected static Login login;
     protected static WebDriver driver;
@@ -20,9 +18,6 @@ public class TestLogin {
 
     @BeforeAll
     public static void setupAll() {
-        //Read the user's properties from file
-        //TODO: if user not exist register it
-
         Utils.setup();
         driver = RunEnvironment.getWebDriver();
         login = new Login(driver);
@@ -42,15 +37,6 @@ public class TestLogin {
 
         registration.clickOnJoinButton();*/
     }
-
-    @BeforeEach
-    public void setup() {
-        //Utils.setup();
-        //driver = RunEnvironment.getWebDriver();
-
-
-    }
-
 
     @Test
     public void testLoginWithValidCredentials() {
@@ -99,18 +85,10 @@ public class TestLogin {
         login.clickOnLoginButton();
         assertFalse(navbar.isLogoutButtonAvailableInTheHeader(),
                 "Login: something went wrong with login. Please check the credentials!");
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-        //Utils.tearDown();
     }
 
     @AfterAll
     public static void tearDownAll() {
         Utils.tearDown();
-        //driver.close();
     }
-
 }
