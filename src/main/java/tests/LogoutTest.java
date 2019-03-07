@@ -44,9 +44,7 @@ public class LogoutTest {
         navbar.clickLogoutInHeader();
         assertFalse(navbar.isLogoutButtonAvailableInTheHeader(),
                 "Logout: something went wrong with logout.");
-
     }
-
 
     @AfterAll
     public static void tearDownAll() {
