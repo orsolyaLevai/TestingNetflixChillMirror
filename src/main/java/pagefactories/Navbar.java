@@ -8,15 +8,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Navbar {
-    //@FindBy(css = "body > app-root > app-navbar > nav > ul.navbar-nav.navbar-right > li:nth-child(2) > a[href*='/join']")
-    @FindBy(xpath = "//nav//a[@href='/join']")
+
+    //@FindBy(xpath = "//nav//a[@href='/join']")
+    @FindBy(css = "a[href*='/join']")
     private WebElement joinButton;
 
     @FindBy(xpath = "//nav//a[contains(text(), 'Logout')]/..")
     private WebElement logoutButton;
 
-    @FindBy(css = "a[href*='/login']")
-    //@FindBy(xpath = "//nav//a[contains(text(), 'Login')]")
+    //@FindBy(css = "a[href*='/login']")
+    @FindBy(xpath = "//nav//a[contains(text(), 'Login')]")
     private WebElement loginButtonInHeader;
 
     @FindBy(css="a[href*='/user-page']")
@@ -51,6 +52,10 @@ public class Navbar {
         driver.navigate().refresh();
         driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOf(logoutButton)).click();
+    }
+
+    public void clickJoinInHeader() {
+        wait.until(ExpectedConditions.elementToBeClickable(joinButton)).click();
     }
 
     public boolean isLogoutButtonAvailableInTheHeader() {
