@@ -12,10 +12,11 @@ public class EnvironmentManagerMac {
 
     public static void initChromeWebDriver() {
         configProperties = new ConfigProperties();
-        driver = new ChromeDriver();
-        //System.setProperty("webdriver.chrome.driver", configProperties.getDriverPath());
 
-        RunEnvironment.setWebDriver(driver);
+            //String driverPath = configProperties.getDriverPath();
+            driver = new ChromeDriver();
+            //System.setProperty("webdriver.chrome.driver", driverPath);
+            RunEnvironment.setWebDriver(driver);
     }
 
     public static void initFireFoxWebDriver() {

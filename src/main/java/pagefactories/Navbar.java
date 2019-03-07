@@ -11,7 +11,7 @@ public class Navbar {
     @FindBy(css = "body > app-root > app-navbar > nav > ul.navbar-nav.navbar-right > li:nth-child(2) > a[href*='/join']")
     private WebElement joinButton;
 
-    @FindBy(xpath = "//nav//a[contains(text(), 'Logout')]")
+    @FindBy(xpath = "//nav//a[contains(text(), 'Logout')]/..")
     private WebElement logoutButton;
 
     By logoutButtonPath = By.xpath("//nav//a[contains(text(), 'Logout')]");

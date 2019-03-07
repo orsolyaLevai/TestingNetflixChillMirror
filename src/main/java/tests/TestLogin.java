@@ -29,7 +29,7 @@ public class TestLogin {
         driver.manage().window().maximize();
         configProperties = new ConfigProperties();
 
-        /*registration = new Registration(driver);
+        /*Registration registration = new Registration(driver);
 
         String userName = configProperties.getUserName();
         String password = configProperties.getPassword();
