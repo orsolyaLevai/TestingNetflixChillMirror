@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import util.ConfigProperties;
 import util.Utils;
 
+import javax.rmi.CORBA.Util;
+
 public class Login {
 
     //@FindBy(linkText = "Join")
@@ -37,13 +39,14 @@ public class Login {
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected ConfigProperties configProperties;
+    protected Navbar navbar;
     protected String webAddress = "http://localhost:4200/";
-
 
     public Login(WebDriver driver) {
         this.configProperties = new ConfigProperties();
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 2);
+        this.wait = new WebDriverWait(driver, 5);
+        navbar = new Navbar(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -71,8 +74,9 @@ public class Login {
     }*/
 
     public void goToLoginPage() {
-        driver.navigate().to(webAddress);
+        driver.get(webAddress);
         wait.until(ExpectedConditions.elementToBeClickable(loginButtonInHeader)).click();
+        //navbar.clickLoginInTheHeader();
     }
 
     public void fillUserName(String userName) {
@@ -87,18 +91,18 @@ public class Login {
         wait.until(ExpectedConditions.textToBePresentInElementValue(loginPassword, loginPassword.getText()));
     }
 
-    public int clickOnLoginButton() {
+    public void clickOnLoginButton() {
         wait.until(ExpectedConditions.visibilityOf(loginButton)).click();
+    }
 
+    public boolean isLoginButtonDisplayedOnTheForm() {
         try {
-            if(wait.until(ExpectedConditions.visibilityOf(logoutButton)).isDisplayed()) return 0;
+            if(wait.until(ExpectedConditions.visibilityOf(logoutButton)).isDisplayed()) return true;
 
         } catch (TimeoutException exception) {
-            return -1;
+            return false;
         }
-        return 0;
-        /*if (wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).isDisplayed()) return 0;
-        else return -1;*/
+        return true;
     }
 
 }
