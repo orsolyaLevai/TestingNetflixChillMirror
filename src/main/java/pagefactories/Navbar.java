@@ -1,8 +1,6 @@
 package pagefactories;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -15,6 +13,8 @@ public class Navbar {
 
     @FindBy(xpath = "//nav//a[contains(text(), 'Logout')]")
     private WebElement logoutButton;
+
+    By logoutButtonPath = By.xpath("//nav//a[contains(text(), 'Logout')]");
 
     @FindBy(css = "a[href*='/login']")
     private WebElement loginButtonInHeader;
@@ -48,5 +48,15 @@ public class Navbar {
 
     public void clickLogoutInHeader() {
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
+    }
+
+    public boolean isLogoutButtonAvailableInTheHeader() {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(logoutButton));
+        } catch (TimeoutException e) {
+            return false;
+        }
+
+        return true;
     }
 }
