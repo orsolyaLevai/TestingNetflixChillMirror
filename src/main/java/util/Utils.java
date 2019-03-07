@@ -20,7 +20,11 @@ public class Utils {
      * password
      * myDriver
      */
-    public static void setup() {
+
+    public Utils() {
+    }
+
+    public void setup() {
         ConfigProperties configProperties = new ConfigProperties();
 
         if (OS.isFamilyMac()) {
@@ -29,12 +33,10 @@ public class Utils {
                 System.out.println("1*******************");
                 System.out.println("Launching chrome browser");
                 EnvironmentManagerMac.initChromeWebDriver();
-                //driver.manage().window().maximize();
-            }else {
+            } else {
                 System.out.println("2*******************");
                 System.out.println("Launching firefox browser");
                 EnvironmentManagerMac.initFireFoxWebDriver();
-                //driver.manage().window().maximize();
             }
 
         } else {
@@ -44,17 +46,16 @@ public class Utils {
                 System.out.println("Launching chrome browser");
                 EnvironmentManagerWin.initChromeWebDriver();
 
-            }else {
+            } else {
                 System.out.println("4*******************");
                 System.out.println("Launching firefox browser");
                 EnvironmentManagerWin.initFireFoxWebDriver();
-
             }
         }
     }
 
 
-    public  static void tearDown() {
+    public void tearDown() {
         if (OS.isFamilyMac()) {
             EnvironmentManagerMac.shutDownDriver();
         } else {
@@ -66,7 +67,7 @@ public class Utils {
      * If an alert appears, it accepts.
      * @param driver
      */
-    public static void acceptAlert(WebDriver driver) {
+    public void acceptAlert(WebDriver driver) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, 2);
             wait.until(ExpectedConditions.alertIsPresent());
@@ -82,7 +83,7 @@ public class Utils {
      * @param webElement
      * @param webDriver
      */
-    public static void highlighter(WebElement webElement, WebDriver webDriver) {
+    public void highlighter(WebElement webElement, WebDriver webDriver) {
         JavascriptExecutor js = (JavascriptExecutor) webDriver;
         js.executeScript("arguments[0].setAttribute('style', 'border: 2px solid red; border-color: red;');", webElement);
     }
