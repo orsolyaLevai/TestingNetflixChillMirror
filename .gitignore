@@ -85,7 +85,7 @@ modules.xml
 target/
 
 ### Login: for private login data ###
-src/main/resources/login/login.properties
+src/main/resources/login.properties
 
 # End of https://www.gitignore.io/api/java-web,intellij+iml
 
