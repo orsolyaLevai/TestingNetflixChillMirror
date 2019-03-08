@@ -5,12 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.RunEnvironment;
 import util.WaitFor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MyPage {
 
@@ -24,6 +24,7 @@ public class MyPage {
     WebElement watchedBtn;
 
     By favTitles = By.cssSelector("div.series-title");
+    By watchedTitles = By.cssSelector("div.series >* div.h3");
 
 
     private WebDriver driver;
@@ -41,16 +42,25 @@ public class MyPage {
         wf.clickable(watchListBtn).click();
     }
 
-    public void goToFavorites(){
+    public MyPage goToFavorites(){
         wf.clickable(favoritesBtn).click();
+        return this;
     }
 
-    public void goToMyShows(){
+    public MyPage goToMyShows(){
         wf.clickable(watchedBtn).click();
+        return this;
     }
 
-    public List<String> getFavoriteSeries(){
-        wf.presence(favTitles);
-        return null;
+    public List<String> getFavoriteTitles(){
+        return wf.presenceOfAll(favTitles).stream().map((el) -> el.getText().trim()).collect(Collectors.toList());
+    }
+
+    public List<String> getWatchedTitles(){
+        return wf.presenceOfAll(watchedTitles).stream().map((el) -> getCleanTitle(el.getText())).collect(Collectors.toList());
+    }
+
+    private String getCleanTitle(String text){
+        return text.replace("(ended)", "").replace("(running)", "").trim();
     }
 }

@@ -25,7 +25,7 @@ public class LoginPage {
     @FindBy(id = "password-login")
     protected WebElement loginPassword;
 
-    @FindBy(xpath = "//button[@type='submit' and contains(., 'LoginPage')]")
+    @FindBy(xpath = "//button[@type='submit' and text()='Login']")
     protected WebElement loginButton;
 
     protected WebDriver driver;
@@ -84,7 +84,7 @@ public class LoginPage {
     }
 
     public void clickOnLoginButton() {
-        wait.until(ExpectedConditions.visibilityOf(loginButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
     }
 
     public boolean isLoginButtonDisplayedOnTheForm() {

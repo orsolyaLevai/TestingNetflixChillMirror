@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class WaitFor {
     private WebDriverWait wait;
 
@@ -18,7 +20,13 @@ public class WaitFor {
     }
 
     public WebElement presence(By by){
+
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public List<WebElement> presenceOfAll(By by){
+
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
     }
 
 }

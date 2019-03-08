@@ -1,6 +1,7 @@
 package pagefactories;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,9 +41,17 @@ public class ShowDetails {
 
     public void addToFavorites(){
         addToFavoritesIcon.click();
+        removeToast();
+
     }
 
     public void addToMyShows(){
         addToWatchedIcon.click();
+        removeToast();
+    }
+
+    private void removeToast(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.getElementById(\"toast-container\").parentNode.remove()");
     }
 }
